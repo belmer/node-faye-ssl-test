@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://localhost:8000/faye.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" charset="utf-8">
+      var client = new Faye.Client('https://localhost:8000/faye');
+      client.subscribe('/pong', function(obj) {
+        console.log('received pong ' + obj);
+      });
+      
+      var n = 0;
+      setInterval(function() {
+        ++n;
+        console.log('sending ping ' + n);
+        client.publish('/ping', n);
+      }, 500);
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
